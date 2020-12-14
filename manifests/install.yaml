@@ -2447,6 +2447,13 @@ spec:
         volumeMounts:
         - mountPath: /shared
           name: static-files
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "256m"
       initContainers:
       - command:
         - cp
@@ -2507,6 +2514,13 @@ spec:
         name: redis
         ports:
         - containerPort: 6379
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "256m"
       securityContext:
         fsGroup: 1000
         runAsGroup: 1000
@@ -2573,6 +2587,13 @@ spec:
           name: gpg-keys
         - mountPath: /app/config/gpg/keys
           name: gpg-keyring
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "256m"
       volumes:
       - configMap:
           name: argocd-ssh-known-hosts-cm
@@ -2623,6 +2644,7 @@ spec:
         - argocd-server
         - --staticassets
         - /shared/app
+        - --insecure
         image: argoproj/argocd:latest
         imagePullPolicy: Always
         livenessProbe:
@@ -2646,6 +2668,13 @@ spec:
           name: ssh-known-hosts
         - mountPath: /app/config/tls
           name: tls-certs
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "256m"
       serviceAccountName: argocd-server
       volumes:
       - emptyDir: {}
@@ -2715,4 +2744,11 @@ spec:
             port: 8082
           initialDelaySeconds: 5
           periodSeconds: 10
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "768m"
       serviceAccountName: argocd-application-controller

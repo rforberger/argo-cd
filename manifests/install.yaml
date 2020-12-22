@@ -2645,6 +2645,7 @@ spec:
         - --staticassets
         - /shared/app
         - --insecure
+        - --rootpath=/argocd
         image: argoproj/argocd:latest
         imagePullPolicy: Always
         livenessProbe:
@@ -2749,6 +2750,6 @@ spec:
             memory: "128Mi"
             cpu: "250m"
           limits:
-            memory: "512Mi"
-            cpu: "768m"
+            memory: "1024Mi"
+            cpu: "500m"
       serviceAccountName: argocd-application-controller
